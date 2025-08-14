@@ -1,15 +1,19 @@
 import { preloadImages } from './utils.js'; // Import utility function to preload images
 
-gsap.registerPlugin(ScrollTrigger); // Register GSAP's ScrollTrigger plugin
-gsap.registerPlugin(SplitText);     // Register GSAP's SplitText plugin
+// GSAP plugins are already registered in HTML, no need to register again
 
 const grid = document.querySelector('.grid'); // Select the container that holds all grid items
-const gridImages = grid.querySelectorAll('.grid__item-imgwrap'); // Select all elements with the class '.grid__item-imgwrap'
+const gridImages = grid ? grid.querySelectorAll('.grid__item-imgwrap') : []; // Select all elements with the class '.grid__item-imgwrap'
 
 const marqueeInner = document.querySelector('.mark > .mark__inner'); // Select the inner element of the marquee
 
 const textElement = document.querySelector('.text'); // Select the text element
-var splitTextEl = new SplitText(textElement, {type: 'chars'}); // Split the text into individual characters for animation
+var splitTextEl = null;
+
+// Only create SplitText if the element exists
+if (textElement && typeof SplitText !== 'undefined') {
+  splitTextEl = new SplitText(textElement, {type: 'chars'});
+}
 
 const gridFull = document.querySelector('.grid--full'); // Select the full grid container
 
@@ -24,6 +28,8 @@ const isLeftSide = (element) => {
 
 // Function to animate the grid items as they scroll into and out of view
 const animateScrollGrid = () => {
+  if (!gridImages || gridImages.length === 0) return;
+  
   gridImages.forEach(imageWrap => {
     const imgEl = imageWrap.querySelector('.grid__item-img'); // Select the image element inside the grid item
     const leftSide = isLeftSide(imageWrap); // Check if the element is on the left side of the viewport
@@ -73,6 +79,8 @@ const animateScrollGrid = () => {
 
 // Function to animate the horizontal marquee as the user scrolls
 const animateMarquee = () => {
+  if (!marqueeInner) return;
+  
   gsap.timeline({
     scrollTrigger: {
       trigger: grid,                     // Trigger the animation based on the grid's position
@@ -91,6 +99,8 @@ const animateMarquee = () => {
 
 // Function to animate text (split into characters) as it scrolls into view
 const animateTextElement = () => {
+  if (!textElement || !splitTextEl) return;
+  
   gsap.timeline({
     scrollTrigger: {
       trigger: textElement,              // Trigger the animation when the text element enters the viewport
