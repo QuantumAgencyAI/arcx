@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ArcX Studio - Whitepaper</title>
+  <meta name="keywords" content="arcx, studio, decentralized, AI, production, blockchain" />
+  <meta name="author" content="ARCXPROD" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Lora', serif;
+      line-height: 1.6;
+      color: #ffffff;
+      background: #000000;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Background Image */
+    .background-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('img/arcX (3).png') center/cover;
+      opacity: 0.2;
+      z-index: -1;
+    }
+
+    /* Header */
+    .header {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+
+    .header h1 {
+      font-size: clamp(3rem, 8vw, 8rem);
+      font-weight: 400;
+      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+      color: #fff;
+      text-shadow: 0 0 30px rgba(255,255,255,0.3);
+    }
+
+    .header p {
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      opacity: 0.9;
+      color: #fff;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    /* Navigation */
+    .nav {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0;
+    }
+
+    .nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 400;
+      transition: all 0.3s ease;
+      padding: 0.8rem 1.5rem;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+    }
+
+    .nav a:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+    }
+
+    /* Main Content */
+    .main {
+      padding: 4rem 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      min-height: 100vh;
+    }
+
+    .content-section {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 3rem;
+      margin: 2rem 0;
+      backdrop-filter: blur(20px);
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .content-section:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .content-section h2 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      margin-bottom: 2rem;
+      color: #fff;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .content-section p {
+      margin-bottom: 1.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.1rem;
+      font-weight: 400;
+      line-height: 1.8;
+    }
+
+    .content-section ul {
+      margin: 2rem 0;
+      padding-left: 2rem;
+    }
+
+    .content-section li {
+      margin-bottom: 1rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 400;
+    }
+
+    .content-section strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* X Logo */
+    .x-logo {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+    }
+
+    .x-logo a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .x-logo a:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .x-icon {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* Footer */
+    .footer {
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer p {
+      opacity: 0.7;
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    .footer a {
+      color: #78c7ff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover {
+      color: #fff;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1.5rem;
+      }
+
+      .header {
+        min-height: 80vh;
+      }
+
+      .content-section {
+        padding: 2rem;
+      }
+
+      .nav-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .main {
+        padding: 2rem 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .header {
+        min-height: 70vh;
+      }
+
+      .content-section {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Image -->
+  <div class="background-image"></div>
+
+  <!-- Header -->
+  <header class="header">
+          <div class="header-content">
+        <h1>Whitepaper</h1>
+        <p>Decentralized AI Production Collective</p>
+      </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav-content">
+        <a href="index.html">← Back to Home</a>
+        <a href="app.html">Join Waitlist</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main">
+    <div class="container">
+      <!-- Overview Section -->
+      <div class="content-section">
+        <h2>Overview</h2>
+        <p>
+          ArcX Studio is a decentralized, AI-driven production house specializing in creating short-form, 
+          high-impact anthology series in the spirit of Love, Death + Robots.
+        </p>
+        <p>
+          Every project combines cinematic storytelling with a next-generation participatory ecosystem, 
+          where the audience doesn't just watch — they co-create.
+        </p>
+        <p>
+          Through the integration of AI content generation, community-driven governance, blockchain-based ownership, 
+          and brand partnerships, ArcX aims to establish a new paradigm for filmmaking and entertainment — 
+          one where creative direction is open, influence is shared, and revenue is distributed.
+        </p>
+      </div>
+
+      <!-- Core Concept Section -->
+      <div class="content-section">
+        <h2>The Core Concept</h2>
+        <p>
+          ArcX is not just producing content; it's redefining how content is owned, governed, and monetized. 
+          The entertainment industry has long been controlled by studios and networks. ArcX shifts the power balance, 
+          making the community both the audience and the producer.
+        </p>
+        <p>
+          This model creates a virtuous cycle: The better the content, the larger the audience. 
+          The larger the audience, the more valuable the token economy. The stronger the economy, 
+          the more ambitious and higher-quality productions become.
+        </p>
+      </div>
+
+      <!-- Roadmap Section -->
+      <div class="content-section">
+        <h2>Roadmap</h2>
+        <ul>
+          <li><strong>Phase 1:</strong> Foundation & Community Building</li>
+          <li><strong>Phase 2:</strong> Token & DAO Preparation</li>
+          <li><strong>Phase 3:</strong> PromptChain Activation</li>
+          <li><strong>Phase 4:</strong> Multichannel Expansion</li>
+          <li><strong>Phase 5:</strong> Brand Partnerships & Monetization</li>
+        </ul>
+      </div>
+
+      <!-- Vision Statement -->
+      <div class="content-section">
+        <h2>Vision Statement</h2>
+        <p>
+          ArcX envisions a future where cinema, storytelling, and influencer culture are decentralized, 
+          transparent, and co-created. By merging AI's creative capabilities with blockchain governance, 
+          ArcX offers a platform where every viewer can become a stakeholder in the stories they love.
+        </p>
+        <p>
+          In this new paradigm, the next generation of digital influencers won't be controlled by corporations — 
+          they'll be guided by the collective intelligence and creativity of a global community.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- X Logo -->
+  <div class="x-logo">
+    <a href="https://x.com/i/communities/1956309662044741806" target="_blank" rel="noopener noreferrer">
+      <svg class="x-icon" viewBox="0 0 24 24">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 ArcX Studio. All rights reserved.</p>
+      <p>Join our <a href="https://x.com/i/communities/1956309662044741806" target="_blank">community</a> for updates and discussions.</p>
+    </div>
+  </footer>
+</body>
+</html>

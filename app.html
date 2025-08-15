@@ -303,6 +303,69 @@
        display: none;
      }
 
+     /* DAO Message Styles */
+     .dao-message {
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       background: rgba(0, 0, 0, 0.8);
+       backdrop-filter: blur(20px);
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       z-index: 1000;
+     }
+
+     .dao-content {
+       background: rgba(255, 255, 255, 0.08);
+       border: 1px solid rgba(255, 255, 255, 0.2);
+       border-radius: 20px;
+       padding: 3rem;
+       text-align: center;
+       max-width: 500px;
+       backdrop-filter: blur(20px);
+       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+     }
+
+     .dao-icon {
+       font-size: 4rem;
+       margin-bottom: 1.5rem;
+     }
+
+     .dao-content h3 {
+       font-size: 2rem;
+       margin-bottom: 1rem;
+       color: #fff;
+       font-weight: 400;
+     }
+
+     .dao-content p {
+       font-size: 1.1rem;
+       color: rgba(255, 255, 255, 0.8);
+       margin-bottom: 2rem;
+       line-height: 1.6;
+     }
+
+     .dao-close-btn {
+       background: rgba(255, 255, 255, 0.1);
+       border: 1px solid rgba(255, 255, 255, 0.2);
+       color: #fff;
+       padding: 0.8rem 2rem;
+       border-radius: 12px;
+       font-size: 1rem;
+       cursor: pointer;
+       transition: all 0.3s ease;
+       backdrop-filter: blur(20px);
+     }
+
+     .dao-close-btn:hover {
+       background: rgba(255, 255, 255, 0.2);
+       border-color: rgba(255, 255, 255, 0.3);
+       transform: translateY(-2px);
+     }
+
      .loading {
        display: inline-block;
        width: 20px;
@@ -353,38 +416,85 @@
        fill: currentColor;
      }
 
-    @media (max-width: 768px) {
-      .app-title {
-        font-size: 2.5rem;
-      }
-      
-      .app-subtitle {
-        font-size: 1.2rem;
-      }
-      
-      .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .app-features {
-        grid-template-columns: 1fr;
-      }
-      
-      .back-button {
-        top: 1rem;
-        left: 1rem;
-      }
-    }
+         @media (max-width: 768px) {
+       .app-title {
+         font-size: 2.5rem;
+       }
+       
+       .app-subtitle {
+         font-size: 1.2rem;
+       }
+       
+       .cta-buttons {
+         flex-direction: column;
+         align-items: center;
+       }
+       
+       .app-features {
+         grid-template-columns: 1fr;
+       }
+       
+       .back-button {
+         top: 1rem;
+         left: 1rem;
+       }
+
+       .top-right-buttons {
+         top: 1rem;
+         right: 1rem;
+         gap: 0.5rem;
+       }
+
+       .top-button {
+         padding: 0.6rem 1rem;
+         font-size: 0.8rem;
+       }
+
+       .waitlist-form {
+         margin: 1rem;
+         padding: 1.5rem;
+       }
+
+       .app-container {
+         padding: 1rem;
+       }
+     }
+
+     @media (max-width: 480px) {
+       .app-title {
+         font-size: 2rem;
+       }
+       
+       .app-subtitle {
+         font-size: 1rem;
+       }
+
+       .app-description {
+         font-size: 1rem;
+       }
+
+       .feature-card {
+         padding: 1.5rem;
+       }
+
+       .x-logo {
+         bottom: 1rem;
+       }
+
+       .x-logo a {
+         width: 40px;
+         height: 40px;
+       }
+     }
   </style>
 </head>
 <body>
   <a href="index.html" class="back-button">← Back</a>
   
-  <div class="top-right-buttons">
-    <a href="#" class="top-button">DAO</a>
-    <a href="#" class="top-button">Whitepaper</a>
-  </div>
+         <div class="top-right-buttons">
+         <a href="#" class="top-button">DAO</a>
+         <a href="whitepaper.html" class="top-button">Whitepaper</a>
+       </div>
   
   <div class="app-container">
          <div class="app-header">
@@ -400,7 +510,6 @@
       
              <div class="cta-buttons">
          <button id="joinWaitlistBtn" class="cta-button">Join Waitlist</button>
-         <a href="#" class="cta-button secondary">Learn More</a>
        </div>
        
        <!-- Waitlist Form -->
@@ -424,6 +533,16 @@
          </div>
          <div id="errorMessage" class="error-message">
            ❌ Something went wrong. Please try again.
+         </div>
+       </div>
+
+       <!-- DAO Message -->
+       <div id="daoMessage" class="dao-message" style="display: none;">
+         <div class="dao-content">
+           <div class="dao-icon">🔒</div>
+           <h3>DAO Coming Soon</h3>
+           <p>Our decentralized autonomous organization is currently in development. Soon you'll be able to participate in governance decisions and shape the future of ArcX Studio.</p>
+           <button class="dao-close-btn" onclick="hideDaoMessage()">Got it</button>
          </div>
        </div>
       
@@ -582,6 +701,12 @@
          }
        });
 
+       // Handle DAO button click
+       document.querySelectorAll('.top-button')[0].addEventListener('click', function(e) {
+         e.preventDefault();
+         document.getElementById('daoMessage').style.display = 'flex';
+       });
+
        // Simulate Supabase API call
        async function simulateSupabaseCall(name, email) {
          // Simulate network delay
@@ -625,6 +750,11 @@
            opacity: 0,
            ease: 'back.out(1.7)'
          });
+       }
+
+       // Function to hide DAO message
+       function hideDaoMessage() {
+         document.getElementById('daoMessage').style.display = 'none';
        }
      });
    </script>
