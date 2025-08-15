@@ -22,17 +22,16 @@
       overflow-x: hidden;
     }
 
-    .app-container {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 2rem;
-      background: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(10px);
-    }
+         .app-container {
+       min-height: 100vh;
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+       text-align: center;
+       padding: 2rem;
+       background: rgba(0, 0, 0, 0.3);
+     }
 
     .app-header {
       margin-bottom: 3rem;
@@ -164,10 +163,124 @@
       z-index: 1000;
     }
 
-    .back-button:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-2px);
-    }
+         .back-button:hover {
+       background: rgba(255, 255, 255, 0.2);
+       transform: translateY(-2px);
+     }
+
+     /* Waitlist Form Styles */
+     .waitlist-form {
+       background: rgba(255, 255, 255, 0.1);
+       border: 1px solid rgba(255, 255, 255, 0.2);
+       border-radius: 20px;
+       padding: 2rem;
+       margin-top: 2rem;
+       max-width: 500px;
+       width: 100%;
+       backdrop-filter: blur(20px);
+     }
+
+     .form-group {
+       margin-bottom: 1.5rem;
+       text-align: left;
+     }
+
+     .form-group label {
+       display: block;
+       margin-bottom: 0.5rem;
+       font-weight: 600;
+       font-size: 0.9rem;
+       text-transform: uppercase;
+       letter-spacing: 0.1em;
+     }
+
+     .form-group input {
+       width: 100%;
+       padding: 1rem;
+       border: 1px solid rgba(255, 255, 255, 0.3);
+       border-radius: 10px;
+       background: rgba(255, 255, 255, 0.1);
+       color: white;
+       font-size: 1rem;
+       transition: all 0.3s ease;
+       box-sizing: border-box;
+     }
+
+     .form-group input:focus {
+       outline: none;
+       border-color: #ff6b6b;
+       background: rgba(255, 255, 255, 0.15);
+       box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.3);
+     }
+
+     .form-group input::placeholder {
+       color: rgba(255, 255, 255, 0.6);
+     }
+
+     .submit-btn {
+       width: 100%;
+       padding: 1rem;
+       background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+       border: none;
+       border-radius: 10px;
+       color: white;
+       font-size: 1.1rem;
+       font-weight: 600;
+       cursor: pointer;
+       transition: all 0.3s ease;
+       text-transform: uppercase;
+       letter-spacing: 0.1em;
+       box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+     }
+
+     .submit-btn:hover {
+       transform: translateY(-2px);
+       box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+       background: linear-gradient(45deg, #ff5252, #ff7043);
+     }
+
+     .submit-btn:disabled {
+       opacity: 0.6;
+       cursor: not-allowed;
+       transform: none;
+     }
+
+     .success-message {
+       background: rgba(76, 175, 80, 0.2);
+       border: 1px solid rgba(76, 175, 80, 0.5);
+       border-radius: 10px;
+       padding: 1rem;
+       margin-top: 1rem;
+       color: #4caf50;
+       text-align: center;
+       display: none;
+     }
+
+     .error-message {
+       background: rgba(244, 67, 54, 0.2);
+       border: 1px solid rgba(244, 67, 54, 0.5);
+       border-radius: 10px;
+       padding: 1rem;
+       margin-top: 1rem;
+       color: #f44336;
+       text-align: center;
+       display: none;
+     }
+
+     .loading {
+       display: inline-block;
+       width: 20px;
+       height: 20px;
+       border: 3px solid rgba(255, 255, 255, 0.3);
+       border-radius: 50%;
+       border-top-color: #fff;
+       animation: spin 1s ease-in-out infinite;
+       margin-right: 10px;
+     }
+
+     @keyframes spin {
+       to { transform: rotate(360deg); }
+     }
 
     @media (max-width: 768px) {
       .app-title {
@@ -209,10 +322,34 @@
         where artists become pioneers, and where the future of digital expression is being written.
       </p>
       
-      <div class="cta-buttons">
-        <a href="#" class="cta-button">Join Community</a>
-        <a href="#" class="cta-button secondary">Learn More</a>
-      </div>
+             <div class="cta-buttons">
+         <button id="joinWaitlistBtn" class="cta-button">Join Waitlist</button>
+         <a href="#" class="cta-button secondary">Learn More</a>
+       </div>
+       
+       <!-- Waitlist Form -->
+       <div id="waitlistForm" class="waitlist-form" style="display: none;">
+         <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Join the ARCX Waitlist</h3>
+         <form id="waitlistFormElement">
+           <div class="form-group">
+             <label for="name">Full Name</label>
+             <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+           </div>
+           <div class="form-group">
+             <label for="email">Email Address</label>
+             <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+           </div>
+           <button type="submit" class="submit-btn" id="submitBtn">
+             <span id="submitText">Join Waitlist</span>
+           </button>
+         </form>
+         <div id="successMessage" class="success-message">
+           🎉 Welcome to ARCX! You've been added to our waitlist. We'll notify you when we launch!
+         </div>
+         <div id="errorMessage" class="error-message">
+           ❌ Something went wrong. Please try again.
+         </div>
+       </div>
       
       <div class="app-features">
         <div class="feature-card">
@@ -275,14 +412,136 @@
       delay: 0.9
     });
     
-    gsap.from('.feature-card', {
-      duration: 1,
-      y: 50,
-      opacity: 0,
-      ease: 'power3.out',
-      delay: 1.2,
-      stagger: 0.2
-    });
-  </script>
+         gsap.from('.feature-card', {
+       duration: 1,
+       y: 50,
+       opacity: 0,
+       ease: 'power3.out',
+       delay: 1.2,
+       stagger: 0.2
+     });
+   </script>
+
+   <!-- Waitlist Form JavaScript -->
+   <script>
+     document.addEventListener('DOMContentLoaded', function() {
+       const joinWaitlistBtn = document.getElementById('joinWaitlistBtn');
+       const waitlistForm = document.getElementById('waitlistForm');
+       const waitlistFormElement = document.getElementById('waitlistFormElement');
+       const submitBtn = document.getElementById('submitBtn');
+       const submitText = document.getElementById('submitText');
+       const successMessage = document.getElementById('successMessage');
+       const errorMessage = document.getElementById('errorMessage');
+
+       // Show/hide waitlist form
+       joinWaitlistBtn.addEventListener('click', function() {
+         if (waitlistForm.style.display === 'none') {
+           waitlistForm.style.display = 'block';
+           joinWaitlistBtn.textContent = 'Hide Form';
+           gsap.from(waitlistForm, {
+             duration: 0.5,
+             y: 30,
+             opacity: 0,
+             ease: 'power3.out'
+           });
+         } else {
+           waitlistForm.style.display = 'none';
+           joinWaitlistBtn.textContent = 'Join Waitlist';
+         }
+       });
+
+       // Handle form submission
+       waitlistFormElement.addEventListener('submit', async function(e) {
+         e.preventDefault();
+         
+         const name = document.getElementById('name').value.trim();
+         const email = document.getElementById('email').value.trim();
+         
+         // Basic validation
+         if (!name || !email) {
+           showError('Please fill in all fields.');
+           return;
+         }
+         
+         // Email validation
+         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+         if (!emailRegex.test(email)) {
+           showError('Please enter a valid email address.');
+           return;
+         }
+         
+         // Show loading state
+         submitBtn.disabled = true;
+         submitText.innerHTML = '<span class="loading"></span>Processing...';
+         
+         try {
+           // Simulate API call to Supabase (fake backend)
+           await simulateSupabaseCall(name, email);
+           
+           // Show success
+           showSuccess();
+           waitlistFormElement.reset();
+           
+           // Hide form after success
+           setTimeout(() => {
+             waitlistForm.style.display = 'none';
+             joinWaitlistBtn.textContent = 'Join Waitlist';
+           }, 3000);
+           
+         } catch (error) {
+           showError('Network error. Please try again.');
+         } finally {
+           // Reset button state
+           submitBtn.disabled = false;
+           submitText.textContent = 'Join Waitlist';
+         }
+       });
+
+       // Simulate Supabase API call
+       async function simulateSupabaseCall(name, email) {
+         // Simulate network delay
+         await new Promise(resolve => setTimeout(resolve, 1500 + Math.random() * 1000));
+         
+         // Simulate random success/failure (90% success rate)
+         if (Math.random() < 0.9) {
+           // Simulate successful database insertion
+           console.log('🚀 Simulating Supabase insert:', { name, email });
+           console.log('📊 Database: arcx_waitlist table');
+           console.log('✅ Record inserted successfully');
+           console.log('📧 Email validation: PASSED');
+           console.log('🔐 User authenticated: true');
+           return { success: true, message: 'User added to waitlist' };
+         } else {
+           // Simulate occasional failure
+           throw new Error('Simulated network error');
+         }
+       }
+
+       function showSuccess() {
+         successMessage.style.display = 'block';
+         errorMessage.style.display = 'none';
+         
+         gsap.from(successMessage, {
+           duration: 0.5,
+           scale: 0.8,
+           opacity: 0,
+           ease: 'back.out(1.7)'
+         });
+       }
+
+       function showError(message) {
+         errorMessage.textContent = message;
+         errorMessage.style.display = 'block';
+         successMessage.style.display = 'none';
+         
+         gsap.from(errorMessage, {
+           duration: 0.5,
+           scale: 0.8,
+           opacity: 0,
+           ease: 'back.out(1.7)'
+         });
+       }
+     });
+   </script>
 </body>
 </html>
