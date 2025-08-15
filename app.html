@@ -31,6 +31,10 @@
        text-align: center;
        padding: 2rem;
        background: rgba(0, 0, 0, 0.3);
+       max-width: 1200px;
+       margin: 0 auto;
+       width: 100%;
+       box-sizing: border-box;
      }
 
     .app-header {
@@ -56,6 +60,10 @@
     .app-content {
       max-width: 800px;
       margin: 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .app-description {
@@ -113,6 +121,10 @@
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
       margin-top: 4rem;
+      width: 100%;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .feature-card {
@@ -416,22 +428,50 @@
        fill: currentColor;
      }
 
-         @media (max-width: 768px) {
+         @media (max-width: 1024px) {
+       .app-container {
+         max-width: 95%;
+         padding: 1.5rem;
+       }
+
+       .app-content {
+         max-width: 90%;
+       }
+
+       .app-features {
+         max-width: 95%;
+         gap: 1.5rem;
+       }
+     }
+
+     @media (max-width: 768px) {
        .app-title {
          font-size: 2.5rem;
+         text-align: center;
        }
        
        .app-subtitle {
          font-size: 1.2rem;
+         text-align: center;
+       }
+       
+       .app-description {
+         text-align: center;
+         max-width: 90%;
+         margin: 0 auto 2rem;
        }
        
        .cta-buttons {
          flex-direction: column;
          align-items: center;
+         justify-content: center;
        }
        
        .app-features {
          grid-template-columns: 1fr;
+         gap: 1.5rem;
+         max-width: 90%;
+         margin: 0 auto;
        }
        
        .back-button {
@@ -451,30 +491,98 @@
        }
 
        .waitlist-form {
-         margin: 1rem;
+         margin: 1rem auto;
          padding: 1.5rem;
+         max-width: 90%;
        }
 
        .app-container {
          padding: 1rem;
+         text-align: center;
+       }
+
+       .app-header {
+         text-align: center;
+         margin-bottom: 2rem;
+       }
+
+       .dao-content {
+         margin: 1rem;
+         padding: 2rem;
+         max-width: 90%;
        }
      }
 
      @media (max-width: 480px) {
        .app-title {
          font-size: 2rem;
+         text-align: center;
        }
        
        .app-subtitle {
          font-size: 1rem;
+         text-align: center;
        }
 
        .app-description {
          font-size: 1rem;
+         text-align: center;
+         max-width: 95%;
+         margin: 0 auto 1.5rem;
+       }
+
+       .app-container {
+         padding: 0.5rem;
+         text-align: center;
+       }
+
+       .app-header {
+         margin-bottom: 1.5rem;
+       }
+
+       .cta-buttons {
+         margin: 1.5rem 0;
+       }
+
+       .cta-button {
+         padding: 0.8rem 1.5rem;
+         font-size: 0.9rem;
        }
 
        .feature-card {
          padding: 1.5rem;
+         margin: 0 auto;
+         max-width: 95%;
+       }
+
+       .waitlist-form {
+         margin: 0.5rem auto;
+         padding: 1.5rem;
+         max-width: 95%;
+       }
+
+       .form-group input {
+         padding: 0.8rem;
+         font-size: 0.9rem;
+       }
+
+       .submit-btn {
+         padding: 0.8rem;
+         font-size: 0.9rem;
+       }
+
+       .dao-content {
+         margin: 0.5rem;
+         padding: 1.5rem;
+         max-width: 95%;
+       }
+
+       .dao-content h3 {
+         font-size: 1.5rem;
+       }
+
+       .dao-content p {
+         font-size: 1rem;
        }
 
        .x-logo {
@@ -484,6 +592,54 @@
        .x-logo a {
          width: 40px;
          height: 40px;
+       }
+
+       .back-button {
+         top: 0.5rem;
+         left: 0.5rem;
+         padding: 0.5rem 0.8rem;
+         font-size: 0.8rem;
+       }
+
+       .top-right-buttons {
+         top: 0.5rem;
+         right: 0.5rem;
+         gap: 0.3rem;
+       }
+
+       .top-button {
+         padding: 0.5rem 0.8rem;
+         font-size: 0.7rem;
+       }
+     }
+
+     @media (max-width: 360px) {
+       .app-title {
+         font-size: 1.8rem;
+       }
+       
+       .app-subtitle {
+         font-size: 0.9rem;
+       }
+
+       .app-description {
+         font-size: 0.9rem;
+         max-width: 98%;
+       }
+
+       .feature-card {
+         padding: 1rem;
+         max-width: 98%;
+       }
+
+       .waitlist-form {
+         padding: 1rem;
+         max-width: 98%;
+       }
+
+       .dao-content {
+         padding: 1rem;
+         max-width: 98%;
        }
      }
   </style>
@@ -707,6 +863,16 @@
          document.getElementById('daoMessage').style.display = 'flex';
        });
 
+       // Add click event listener to DAO close button as backup
+       document.addEventListener('DOMContentLoaded', function() {
+         const daoCloseBtn = document.querySelector('.dao-close-btn');
+         if (daoCloseBtn) {
+           daoCloseBtn.addEventListener('click', function() {
+             document.getElementById('daoMessage').style.display = 'none';
+           });
+         }
+       });
+
        // Simulate Supabase API call
        async function simulateSupabaseCall(name, email) {
          // Simulate network delay
@@ -757,6 +923,11 @@
          document.getElementById('daoMessage').style.display = 'none';
        }
      });
+
+     // Global function for DAO message (accessible from HTML onclick)
+     window.hideDaoMessage = function() {
+       document.getElementById('daoMessage').style.display = 'none';
+     };
    </script>
 </body>
 </html>
