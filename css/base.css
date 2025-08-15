@@ -195,6 +195,16 @@ main {
   color: var(--color-title);
 }
 
+.intro__ca {
+  margin: 0;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(1rem,3vw,1.5rem);
+  color: var(--color-title);
+  opacity: 0.8;
+  letter-spacing: 0.1em;
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;
