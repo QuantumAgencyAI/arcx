@@ -30,6 +30,7 @@
        align-items: center;
        text-align: center;
        padding: 2rem;
+       padding-top: 8rem;
        background: rgba(0, 0, 0, 0.3);
        max-width: 1200px;
        margin: 0 auto;
@@ -180,6 +181,7 @@
        font-size: 0.9rem;
        transition: all 0.3s ease;
        z-index: 1000;
+       min-width: fit-content;
      }
 
      .back-button:hover {
@@ -195,6 +197,8 @@
        display: flex;
        gap: 1rem;
        z-index: 1000;
+       flex-wrap: wrap;
+       max-width: calc(100vw - 4rem);
      }
 
      .top-button {
@@ -436,6 +440,7 @@
        .app-container {
          max-width: 95%;
          padding: 1.5rem;
+         padding-top: 7rem;
        }
 
        .app-content {
@@ -502,6 +507,7 @@
 
        .app-container {
          padding: 1rem;
+         padding-top: 6rem;
          text-align: center;
          transform: translateY(-4%);
        }
@@ -538,6 +544,7 @@
 
        .app-container {
          padding: 0.5rem;
+         padding-top: 5rem;
          text-align: center;
          transform: translateY(-3%);
        }
@@ -613,6 +620,10 @@
          gap: 0.3rem;
        }
 
+       .app-container {
+         padding-top: 4.5rem;
+       }
+
        .top-button {
          padding: 0.5rem 0.8rem;
          font-size: 0.7rem;
@@ -646,6 +657,28 @@
        .dao-content {
          padding: 1rem;
          max-width: 98%;
+       }
+
+       .app-container {
+         padding-top: 4rem;
+       }
+
+       .back-button {
+         top: 0.3rem;
+         left: 0.3rem;
+         padding: 0.4rem 0.6rem;
+         font-size: 0.7rem;
+       }
+
+       .top-right-buttons {
+         top: 0.3rem;
+         right: 0.3rem;
+         gap: 0.2rem;
+       }
+
+       .top-button {
+         padding: 0.4rem 0.6rem;
+         font-size: 0.6rem;
        }
      }
   </style>
