@@ -74,37 +74,39 @@
       margin-bottom: 3rem;
     }
 
-    .cta-button {
-      padding: 1rem 2rem;
-      font-size: 1.1rem;
-      font-weight: 600;
-      text-decoration: none;
-      color: white;
-      background: linear-gradient(45deg, #ff6b6b, #ff8e53);
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
-    }
+         .cta-button {
+       padding: 1rem 2rem;
+       font-size: 1rem;
+       font-weight: 500;
+       text-decoration: none;
+       color: white;
+       background: rgba(255, 255, 255, 0.08);
+       backdrop-filter: blur(20px);
+       border: 1px solid rgba(255, 255, 255, 0.15);
+       border-radius: 12px;
+       cursor: pointer;
+       transition: all 0.3s ease;
+       text-transform: uppercase;
+       letter-spacing: 0.05em;
+       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+     }
 
-    .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
-      background: linear-gradient(45deg, #ff5252, #ff7043);
-    }
+     .cta-button:hover {
+       transform: translateY(-1px);
+       background: rgba(255, 255, 255, 0.12);
+       border-color: rgba(255, 255, 255, 0.25);
+       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+     }
 
-    .cta-button.secondary {
-      background: linear-gradient(45deg, #667eea, #764ba2);
-      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-    }
+     .cta-button.secondary {
+       background: rgba(255, 255, 255, 0.06);
+       border-color: rgba(255, 255, 255, 0.12);
+     }
 
-    .cta-button.secondary:hover {
-      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-      background: linear-gradient(45deg, #5a6fd8, #6a4c93);
-    }
+     .cta-button.secondary:hover {
+       background: rgba(255, 255, 255, 0.1);
+       border-color: rgba(255, 255, 255, 0.2);
+     }
 
     .app-features {
       display: grid;
@@ -147,25 +149,57 @@
       line-height: 1.5;
     }
 
-    .back-button {
-      position: fixed;
-      top: 2rem;
-      left: 2rem;
-      padding: 0.8rem 1.5rem;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 25px;
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      z-index: 1000;
-    }
+         .back-button {
+       position: fixed;
+       top: 2rem;
+       left: 2rem;
+       padding: 0.8rem 1.5rem;
+       background: rgba(255, 255, 255, 0.08);
+       backdrop-filter: blur(20px);
+       border: 1px solid rgba(255, 255, 255, 0.15);
+       border-radius: 12px;
+       color: white;
+       text-decoration: none;
+       font-weight: 500;
+       font-size: 0.9rem;
+       transition: all 0.3s ease;
+       z-index: 1000;
+     }
 
-         .back-button:hover {
-       background: rgba(255, 255, 255, 0.2);
-       transform: translateY(-2px);
+     .back-button:hover {
+       background: rgba(255, 255, 255, 0.12);
+       transform: translateY(-1px);
+       border-color: rgba(255, 255, 255, 0.25);
+     }
+
+     .top-right-buttons {
+       position: fixed;
+       top: 2rem;
+       right: 2rem;
+       display: flex;
+       gap: 1rem;
+       z-index: 1000;
+     }
+
+     .top-button {
+       padding: 0.8rem 1.5rem;
+       background: rgba(255, 255, 255, 0.08);
+       backdrop-filter: blur(20px);
+       border: 1px solid rgba(255, 255, 255, 0.15);
+       border-radius: 12px;
+       color: white;
+       text-decoration: none;
+       font-weight: 500;
+       font-size: 0.9rem;
+       transition: all 0.3s ease;
+       text-transform: uppercase;
+       letter-spacing: 0.05em;
+     }
+
+     .top-button:hover {
+       background: rgba(255, 255, 255, 0.12);
+       transform: translateY(-1px);
+       border-color: rgba(255, 255, 255, 0.25);
      }
 
      /* Waitlist Form Styles */
@@ -220,23 +254,25 @@
      .submit-btn {
        width: 100%;
        padding: 1rem;
-       background: linear-gradient(45deg, #ff6b6b, #ff8e53);
-       border: none;
-       border-radius: 10px;
+       background: rgba(255, 255, 255, 0.08);
+       backdrop-filter: blur(20px);
+       border: 1px solid rgba(255, 255, 255, 0.15);
+       border-radius: 12px;
        color: white;
-       font-size: 1.1rem;
-       font-weight: 600;
+       font-size: 1rem;
+       font-weight: 500;
        cursor: pointer;
        transition: all 0.3s ease;
        text-transform: uppercase;
-       letter-spacing: 0.1em;
-       box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+       letter-spacing: 0.05em;
+       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
      }
 
      .submit-btn:hover {
-       transform: translateY(-2px);
-       box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
-       background: linear-gradient(45deg, #ff5252, #ff7043);
+       transform: translateY(-1px);
+       background: rgba(255, 255, 255, 0.12);
+       border-color: rgba(255, 255, 255, 0.25);
+       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
      }
 
      .submit-btn:disabled {
@@ -282,6 +318,42 @@
        to { transform: rotate(360deg); }
      }
 
+     .x-logo {
+       position: fixed;
+       bottom: 2rem;
+       left: 50%;
+       transform: translateX(-50%);
+       z-index: 1000;
+     }
+
+     .x-logo a {
+       display: flex;
+       align-items: center;
+       gap: 0.5rem;
+       padding: 0.8rem 1.5rem;
+       background: rgba(255, 255, 255, 0.08);
+       backdrop-filter: blur(20px);
+       border: 1px solid rgba(255, 255, 255, 0.15);
+       border-radius: 12px;
+       color: white;
+       text-decoration: none;
+       font-weight: 500;
+       font-size: 0.9rem;
+       transition: all 0.3s ease;
+     }
+
+     .x-logo a:hover {
+       background: rgba(255, 255, 255, 0.12);
+       transform: translateY(-1px);
+       border-color: rgba(255, 255, 255, 0.25);
+     }
+
+     .x-icon {
+       width: 18px;
+       height: 18px;
+       fill: currentColor;
+     }
+
     @media (max-width: 768px) {
       .app-title {
         font-size: 2.5rem;
@@ -309,6 +381,11 @@
 </head>
 <body>
   <a href="index.html" class="back-button">← Back</a>
+  
+  <div class="top-right-buttons">
+    <a href="#" class="top-button">DAO</a>
+    <a href="#" class="top-button">Whitepaper</a>
+  </div>
   
   <div class="app-container">
     <div class="app-header">
@@ -369,11 +446,21 @@
           <h3 class="feature-title">Web3 Future</h3>
           <p class="feature-description">Be part of the decentralized creative revolution</p>
         </div>
-      </div>
-    </div>
-  </div>
+             </div>
+     </div>
+   </div>
 
-  <!-- GSAP library and plugins from official CDN -->
+   <!-- X Logo -->
+   <div class="x-logo">
+     <a href="https://x.com/i/communities/1956309662044741806" target="_blank" rel="noopener noreferrer">
+       <svg class="x-icon" viewBox="0 0 24 24">
+         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+       </svg>
+       Join Community
+     </a>
+   </div>
+
+   <!-- GSAP library and plugins from official CDN -->
   <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script>
