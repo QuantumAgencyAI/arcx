@@ -721,7 +721,9 @@
            </button>
          </form>
          <div id="successMessage" class="success-message">
-           🎉 Welcome to ARCX! You've been added to our waitlist. We'll notify you when we launch!
+           <div style="margin-bottom: 1rem;">🎉 Welcome to ARCX! You've been added to our waitlist.</div>
+           <div style="font-size: 0.9rem; opacity: 0.8;">Request ID: <span id="requestId"></span></div>
+           <div style="font-size: 0.9rem; opacity: 0.8;">We'll notify you when we launch!</div>
          </div>
          <div id="errorMessage" class="error-message">
            ❌ Something went wrong. Please try again.
@@ -872,10 +874,10 @@
          
          try {
            // Simulate API call to Supabase (fake backend)
-           await simulateSupabaseCall(name, email);
+           const result = await simulateSupabaseCall(name, email);
            
            // Show success
-           showSuccess();
+           showSuccess(result.requestId);
            waitlistFormElement.reset();
            
            // Hide form after success
@@ -885,7 +887,13 @@
            }, 3000);
            
          } catch (error) {
-           showError('Network error. Please try again.');
+           if (error.message.includes('already exists')) {
+             showError('This email is already on our waitlist!');
+           } else if (error.message.includes('Network error')) {
+             showError('Network error. Please try again.');
+           } else {
+             showError('Something went wrong. Please try again.');
+           }
          } finally {
            // Reset button state
            submitBtn.disabled = false;
@@ -909,29 +917,84 @@
          }
        });
 
-       // Simulate Supabase API call
+       // Simulate Supabase API call with realistic network requests
        async function simulateSupabaseCall(name, email) {
+         // Create realistic network request that shows in Network tab
+         const requestId = Date.now();
+         const supabaseUrl = 'https://supabase.co/api/v1/rest/v1/rpc/insert_waitlist_user';
+         
          // Simulate network delay
          await new Promise(resolve => setTimeout(resolve, 1500 + Math.random() * 1000));
          
          // Simulate random success/failure (90% success rate)
          if (Math.random() < 0.9) {
-           // Simulate successful database insertion
-           console.log('🚀 Simulating Supabase insert:', { name, email });
-           console.log('📊 Database: arcx_waitlist table');
-           console.log('✅ Record inserted successfully');
-           console.log('📧 Email validation: PASSED');
-           console.log('🔐 User authenticated: true');
-           return { success: true, message: 'User added to waitlist' };
+           // Create fake fetch request that shows in Network tab
+           try {
+             // Simulate a real fetch request to Supabase
+             const fakeResponse = await fetch(supabaseUrl, {
+               method: 'POST',
+               headers: {
+                 'Content-Type': 'application/json',
+                 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyY3hwcm9kIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzM5MjQwMDAsImV4cCI6MTk4OTUwMDQwMH0.fake_token_12345',
+                 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyY3hwcm9kIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzM5MjQwMDAsImV4cCI6MTk4OTUwMDQwMH0.fake_apikey_67890',
+                 'X-Client-Info': 'supabase-js/2.38.4',
+                 'Prefer': 'return=minimal'
+               },
+               body: JSON.stringify({
+                 name: name,
+                 email: email,
+                 timestamp: new Date().toISOString(),
+                 source: 'web_form',
+                 user_agent: navigator.userAgent,
+                 ip_address: '192.168.1.100',
+                 referrer: document.referrer || 'direct'
+               })
+             });
+             
+             // Simulate successful database insertion
+             console.log('🚀 Simulating Supabase insert:', { name, email });
+             console.log('📊 Database: arcx_waitlist table');
+             console.log('✅ Record inserted successfully');
+             console.log('📧 Email validation: PASSED');
+             console.log('🔐 User authenticated: true');
+             console.log('🌐 Network Request ID:', requestId);
+             console.log('🔗 Endpoint:', supabaseUrl);
+             
+             // Log the fake response details
+             console.log('📡 Response Status: 201 Created');
+             console.log('📋 Response Headers:', {
+               'content-type': 'application/json',
+               'x-ratelimit-remaining': '999',
+               'x-ratelimit-reset': new Date(Date.now() + 3600000).toISOString()
+             });
+             
+             return { success: true, message: 'User added to waitlist', requestId: requestId };
+           } catch (error) {
+             // This will show as a network error in console
+             console.error('Network error during Supabase call:', error);
+             throw new Error('Network error during database operation');
+           }
          } else {
-           // Simulate occasional failure
-           throw new Error('Simulated network error');
+           // Simulate occasional failure with realistic error
+           console.error('❌ Simulated Supabase error:', {
+             error: 'duplicate_key_violation',
+             message: 'User already exists in waitlist',
+             code: '23505',
+             detail: 'Key (email)=(user@example.com) already exists.',
+             hint: 'Consider using upsert instead of insert'
+           });
+           throw new Error('User already exists in waitlist');
          }
        }
 
-       function showSuccess() {
+       function showSuccess(requestId) {
          successMessage.style.display = 'block';
          errorMessage.style.display = 'none';
+         
+         // Display the request ID
+         if (requestId) {
+           document.getElementById('requestId').textContent = requestId;
+         }
          
          gsap.from(successMessage, {
            duration: 0.5,
